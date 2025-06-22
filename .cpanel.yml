@@ -1,0 +1,11 @@
+---
+deployment:
+  tasks:
+<<<<<<< HEAD
+    - export DEPLOYPATH=/home/snmrnipqkt/deployment/form-generator-production
+=======
+    - export DEPLOYPATH=/home/snmrnipqkt/deployment/form-generator
+>>>>>>> 067328c50bfcdff054ef7325a881b79435d208b9
+    - /bin/rm -rfv $DEPLOYPATH
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -r * $DEPLOYPATH

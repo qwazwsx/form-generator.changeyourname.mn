@@ -1,0 +1,20 @@
+{
+  "name": "changeyourname.mn-form-generator",
+  "version": "1.0.0",
+  "description": "A website that automatically generates the forms required to change your name in Minnesota",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwazwsx/changeyourname.mn-form-generator.git"
+  },
+  "author": "Emma Zimbinski",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/qwazwsx/changeyourname.mn-form-generator/issues"
+  },
+  "homepage": "https://github.com/qwazwsx/changeyourname.mn-form-generator#readme"
+}

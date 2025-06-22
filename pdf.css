@@ -1,0 +1,138 @@
+md-outlined-text-field#currentFirstName {
+    width: 250px;
+}
+
+md-outlined-text-field#currentMiddleName {
+    width: 250px;
+}
+
+md-outlined-text-field#currentLastName {
+    width: 250px;
+}
+
+
+
+md-outlined-text-field#dateOfBirth {}
+
+
+.section {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+md-outlined-text-field#legallyBindingSignature {
+    width: 350px;
+}
+
+.tabContent {
+    margin-top: 20px;
+}
+
+md-outlined-text-field {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+body {
+    font: 'Roboto';
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    /* text-align: center; */
+    /* margin-bottom: 5px; */
+    /* background: linear-gradient(to bottom, #ff7096d4,  #ffb347d4,  #fdfd66d4,  #80f28fd4,  #5edbffd4,  #709effd4,  #b586ffd4 ); */
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 3px solid #0000002b;
+    margin: 1em 0;
+    padding: 0;
+    border-radius: 10px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+p {
+    text-align: center;
+    margin-top: 0px;
+}
+
+.footer {
+    /* position: fixed; */
+    bottom: 0px;
+}
+
+.submit.section {
+    /* margin-top: 50px; */
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.submit.section p {margin: 0;}
+
+md-filled-button.submit {
+    margin-bottom: 5px;
+}
+
+body {
+    background: linear-gradient(270deg,
+  #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a);
+    background-size: 600% 600%;
+    animation: rainbowFlow 15s ease infinite;
+    @keyframes rainbowFlow {
+  0% { background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; }
+};
+}
+
+@keyframes rainbowFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+:root {
+  --md-sys-color-primary: #000000;
+  --md-sys-color-secondary: #27c300;
+}
+
+.submit md-filled-button {
+    /* background-color: red; */
+    --md-sys-color-primary: #00000066;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+p.warn {
+    font-size: small;
+    font-weight: 200;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 p {
+    display: inline;
+    font-size: 10px;
+    /* margin-bottom: .5em; */
+    cursor: pointer;
+    color: #5e5eff;
+}
+
+.submit m {}

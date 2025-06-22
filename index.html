@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+    </script>
+    <link rel="stylesheet" href="pdf.css">
+</head>
+
+<body>
+    <form style="display:none;" id="nameChangeForm" action="/NAM102_Application_for_Name_Change.pdf" method="POST"
+        target="_blank">
+        <input type="text" name="currentFirstName">
+        <input type="text" name="currentMiddleName">
+        <input type="text" name="currentLastName">
+        <input type="text" name="newFirstName">
+        <input type="text" name="newMiddleName">
+        <input type="text" name="newLastName">
+        <input type="date" name="dateOfBirth">
+        <input type="text" name="race">
+        <input type="text" name="sexOnBirthRecords">
+        <input type="text" name="newSex">
+        <input type="text" name="address">
+        <input type="text" name="city">
+        <input type="text" name="state">
+        <input type="text" name="zip">
+        <input type="text" name="county">
+        <input type="tel" name="phone">
+        <input type="email" name="email">
+        <input type="text" name="legallyBindingSignature">
+    </form>
+
+    <div class="tabContent">
+
+        <h1>Minnesota Name Change Form Generator</h1>
+        <!-- <p>Use these fields to generate the necessary documents for changing your name in Minnesota.</p> -->
+
+        <div id="materialForm">
+            <h2>Current Identity</h2>
+            <div class="current section">
+                <md-outlined-text-field id="currentFirstName" label="Current Legal First Name"
+                    supporting-text="Legal First Name"></md-outlined-text-field>
+                <md-outlined-text-field id="currentMiddleName" label="Current Legal Middle Name"
+                    supporting-text="Legal Middle Name"></md-outlined-text-field>
+                <md-outlined-text-field id="currentLastName" label="Current Legal Last Name"
+                    supporting-text="Legal Last Name"></md-outlined-text-field>
+                <md-outlined-text-field id="dateOfBirth" label="Date of Birth" type="date"></md-outlined-text-field>
+                <md-outlined-text-field id="race" label="Race" type="text"></md-outlined-text-field>
+            </div>
+
+            <h2>New Identity</h2>
+            <div class="new section">
+                <md-outlined-text-field id="newFirstName" label="New First Name"></md-outlined-text-field>
+                <md-outlined-text-field id="newMiddleName" label="New Middle Name"></md-outlined-text-field>
+                <md-outlined-text-field id="newLastName" label="New Last Name"></md-outlined-text-field>
+            </div>
+
+            <h2>Sex <p onclick="sexHelp()">(?)</p></h2>
+            <div class="sex section">
+                <md-outlined-select id="sexOnBirthRecords"
+                    supporting-text="Your sex (at birth) as it appears on your birth certificate">
+                    <!-- <md-select-option aria-label="blank"></md-select-option> -->
+                    <md-select-option value="Male">
+                        <div slot="headline">Male</div>
+                    </md-select-option>
+                    <md-select-option value="Female">
+                        <div slot="headline">Female</div>
+                    </md-select-option>
+                </md-outlined-select>
+
+
+                <md-outlined-select id="newSex" supporting-text="Your new sex as you want it on your birth certificate">
+                    <!-- <md-select-option aria-label="blank"></md-select-option> -->
+                    <md-select-option value="Male">
+                        <div slot="headline">Male</div>
+                    </md-select-option>
+                    <md-select-option value="Female">
+                        <div slot="headline">Female</div>
+                    </md-select-option>
+                </md-outlined-select>
+
+
+            </div>
+
+            <h2>Contact Information</h2>
+            <div class="address section">
+                <md-outlined-text-field id="address" label="Address"></md-outlined-text-field>
+                <md-outlined-text-field id="city" label="City"></md-outlined-text-field>
+                <md-outlined-text-field id="state" label="State"></md-outlined-text-field>
+                <md-outlined-text-field id="zip" label="ZIP Code"></md-outlined-text-field>
+                <md-outlined-text-field id="county" label="County"></md-outlined-text-field>
+            </div>
+
+            <div class="contact section">
+                <md-outlined-text-field id="phone" label="Phone Number"></md-outlined-text-field>
+                <md-outlined-text-field id="email" label="Email Address"></md-outlined-text-field>
+            </div>
+
+            <h2>Signature</h2>
+            <p>By signing here, you agree this signature will apply to following documents: NAM102, NAM103, NAM107.</p>
+            <div class="signature section">
+                <md-outlined-text-field id="legallyBindingSignature" label="Legally Binding Signature"
+                    supporting-text="This is your legal signature. It may be your new legal name."></md-outlined-text-field>
+            </div>
+
+            <h2>Download your Forms</h2>
+            <div class="submit section">
+                <md-filled-button class="submit" id="submitNAM102">Download Form NAM102 - Application for Name
+                    Change</md-filled-button>
+                <md-filled-button class="submit" id="submitNAM103">Download Form NAM103 - Criminal History Check
+                    Release</md-filled-button>
+                <md-filled-button class="submit" id="submitNAM107">Download Form NAM107 - Proposed Order Granting Name
+                    Change</md-filled-button>
+
+                <p class="warn">Your information is encrypted and is not saved or logged on the server. This app is open
+                    source. Security audits are welcome.</p>
+
+            </div>
+
+            <h2>Verify</h2>
+            <div class="check section">
+                <p>You are responsible for checking the validity of the information in these forms. I am not a lawyer, and the software I wrote definitely isn't one either. If you are married, divorced, have children, a criminal history, or own land, you will need to manually add information to these forms.  </p>
+            </div>
+
+            <div class="footer">
+                <hr>
+                <p>
+                    <i><u>Dedicated to <b>Sara Millerey González</b>, whose life and death calls us to justice.</u></i>
+                    🧱
+                    <br>
+                    I'm not a lawyer, and this isn't legal advice. This guide is based on my own experience and research
+                    &mdash;
+                    double-check everything with official sources or get legal help if you need it.
+
+                    <a href="https://changeyourname.mn/" target="_blank" rel="noopener">Name Change Form Generator</a>
+                    &copy; 2025 by
+                    <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
+                    is licensed under
+                    <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+</a>
+
+
+                </p>
+
+            </div>
+
+            <script>
+                document.getElementById('submitNAM102').addEventListener('click', function () {
+                    document.getElementById('nameChangeForm').action = '/NAM102_Application_for_Name_Change.pdf';
+                    copyData();
+                    document.getElementById('nameChangeForm').submit();
+                });
+
+                document.getElementById('submitNAM103').addEventListener('click', function () {
+                    document.getElementById('nameChangeForm').action = '/NAM103_Criminal_History_Check_Release.pdf';
+                    copyData();
+                    document.getElementById('nameChangeForm').submit();
+                });
+
+                document.getElementById('submitNAM107').addEventListener('click', function () {
+                    document.getElementById('nameChangeForm').action = '/NAM107_Proposed_Order_Granting_Name_Change.pdf';
+                    copyData();
+                    document.getElementById('nameChangeForm').submit();
+                });
+
+                function copyData() {
+                    const fields = [
+                        'currentFirstName',
+                        'currentMiddleName',
+                        'currentLastName',
+                        'newFirstName',
+                        'newMiddleName',
+                        'newLastName',
+                        'dateOfBirth',
+                        'race',
+                        'sexOnBirthRecords',
+                        'newSex',
+                        'address',
+                        'city',
+                        'state',
+                        'zip',
+                        'county',
+                        'phone',
+                        'email',
+                        'legallyBindingSignature'
+                    ];
+
+                    fields.forEach(field => {
+                        const value = document.getElementById(field).value;
+                        const input = document.querySelector(`input[name="${field}"]`);
+                        if (input) {
+                            input.value = value;
+                        }
+                    });
+                }
+
+
+                function sexHelp() {
+                    alert('This is the sex marker on your birth certificate. It is not the self designated sex descriptor on your ID. It is not the gender marker with the Social Security Administration. As far as I know, it is limited to binary male and female.')
+                }
+
+            </script>
+
+        </div>
+
+        <!-- Google tag (gtag.js)
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZQTGQ207FY');
+        </script> -->
+</body>
+
+</html>
