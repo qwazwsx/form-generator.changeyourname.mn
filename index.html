@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <title>Minnesota Name Change Form Generator - Legal Name Change Forms</title>
     <meta name="description"
@@ -163,11 +163,11 @@
                     Release</md-filled-button>
                 <md-filled-button class="submit" id="submitNAM107">Download Form NAM107 - Proposed Order Granting Name
                     Change</md-filled-button>
-
-                <p class="warn">Your information is encrypted and is not saved or logged on the server. This app is open
-                    source. Security audits are welcome.</p>
-
             </div>
+
+            <p class="warn">Your information is encrypted and is not saved or logged on the server. This app is <a
+                    href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank"
+                    rel="noopener">open source</a>. Security audits are welcome.</p>
 
             <h2>Verify</h2>
             <div class="check section">
@@ -186,11 +186,18 @@
                     &mdash;
                     double-check everything with official sources or get legal help if you need it.
 
-                    <a href="https://changeyourname.mn/" target="_blank" rel="noopener">Name Change Form Generator</a>
+                    <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank"
+                        rel="noopener">View source on GitHub</a>.
+                        
+                    <br>
+
+                    <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener">Name Change Form
+                        Generator</a>
                     &copy; 2025 by
                     <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
                     is licensed under
-                    <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+</a>
+                    <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+.</a>
+
 
 
                 </p>
@@ -209,7 +216,7 @@
                         dateOfBirth.value = '';
                     }, 1000);
                 }
-                
+
 
                 document.getElementById('submitNAM102').addEventListener('click', function () {
                     document.getElementById('nameChangeForm').action = '/NAM102_Application_for_Name_Change.pdf';
