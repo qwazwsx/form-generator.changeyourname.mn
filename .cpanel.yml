@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/snmrnipqkt/deployment/form-generator-production
+    - export DEPLOYPATH=/home/snmrnipqkt/form-generator.changeyourname.mn
     - /bin/rm -rfv $DEPLOYPATH
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -r * $DEPLOYPATH
