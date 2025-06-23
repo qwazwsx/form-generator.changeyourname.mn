@@ -154,7 +154,7 @@ const manifest = [
                 "hasNoCriminalHistory": true,
                 "hasNoLand": true,
                 "date": formatDate(new Date()),
-                "fullname1": `${data.newfirstName} ${data.newMiddleName} ${data.newLastName} (${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName})`,
+                "fullname1": `${data.newFirstName} ${data.newMiddleName} ${data.newLastName} (${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName})`,
                 "signature": data.legallyBindingSignature,
                 "address1": data.address,
                 "countyandstate": `${data.county}, ${data.state}`,
@@ -213,6 +213,11 @@ function validateManifest() {
                 email: "asd@example.com",
                 legallyBindingSignature: "John Doe"
             })
+
+            let json  = JSON.stringify(fields, null, 2);
+            if (json.indexOf('undefined') !== -1) {
+                throw new Error(`[Fatal] Build function for ${item.name} returned undefined fields. Please check the build function.`);
+            }
 
             // for each field in the manifest, check if it exists in the built fields
             // that is -- make sure the build function provided all the fields given the test input
