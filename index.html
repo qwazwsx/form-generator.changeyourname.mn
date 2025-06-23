@@ -168,20 +168,38 @@
                     }, 1000);
                 }
 
+
+                let debug = true
+                if (window.location.hostname === 'changeyourname.mn') {
+                    debug = false;
+                }
+
                 document.getElementById('submitNAM102').addEventListener('click', function () {
-                    document.getElementById('nameChangeForm').action = '/NAM102_Application_for_Name_Change.pdf';
+                    if (debug) {
+                        document.getElementById('nameChangeForm').action = '/NAM102_Application_for_Name_Change.pdf';
+                    } else {
+                        document.getElementById('nameChangeForm').action = 'https://form-generator.changeyourname.mn:4747/NAM102_Application_for_Name_Change.pdf';
+                    }
                     copyData();
                     document.getElementById('nameChangeForm').submit();
                 });
 
                 document.getElementById('submitNAM103').addEventListener('click', function () {
-                    document.getElementById('nameChangeForm').action = '/NAM103_Criminal_History_Check_Release.pdf';
+                    if (debug) {
+                        document.getElementById('nameChangeForm').action = '/NAM103_Criminal_History_Check_Release.pdf';
+                    } else {
+                        document.getElementById('nameChangeForm').action = 'https://form-generator.changeyourname.mn:4747/NAM103_Criminal_History_Check_Release.pdf';
+                    }
                     copyData();
                     document.getElementById('nameChangeForm').submit();
                 });
 
                 document.getElementById('submitNAM107').addEventListener('click', function () {
-                    document.getElementById('nameChangeForm').action = '/NAM107_Proposed_Order_Granting_Name_Change.pdf';
+                    if (debug) {
+                        document.getElementById('nameChangeForm').action = '/NAM107_Proposed_Order_Granting_Name_Change.pdf';
+                    } else {
+                        document.getElementById('nameChangeForm').action = 'https://form-generator.changeyourname.mn:4747/NAM107_Proposed_Order_Granting_Name_Change.pdf';
+                    }
                     copyData();
                     document.getElementById('nameChangeForm').submit();
                 });
