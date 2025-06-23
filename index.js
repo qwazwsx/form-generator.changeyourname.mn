@@ -1,7 +1,6 @@
 var express = require("express")
 const app = express();
 const bodyParser = require('body-parser')
-
 const pdfFillForm = require('pdf-fill-form');
 
 app.use(bodyParser.urlencoded())
@@ -9,9 +8,8 @@ app.use(bodyParser.urlencoded())
 // serve static content
 app.use(express.static('.'));
 
-const PORT = 4747
-app.listen(PORT, () => { // 4747 is a reference to the date Sara Millerey González was murdered
-    console.log(`Listening on port ${PORT}. View: http://localhost:${PORT}`);
+app.listen(4747, () => { // 4747 is a reference to the date Sara Millerey González was murdered
+    console.log(`Listening on port 4747. View: http://localhost:4747`);
     validateManifest();
 });
 
@@ -59,7 +57,7 @@ const manifest = [
         }
     },
     {
-        name:'NAM103_Criminal_History_Check_Release.pdf',
+        name: 'NAM103_Criminal_History_Check_Release.pdf',
         fields: {
             name: TYPES.TEXT,
             nickname: TYPES.TEXT,
@@ -74,7 +72,7 @@ const manifest = [
                 "name": `${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName}`,
                 "nickname": `${data.newFirstName} ${data.newMiddleName} ${data.newLastName}`,
                 "dob": data.dateOfBirth,
-                "isF": data.sexOnBirthRecords.toLowerCase().indexOf('female') !== -1, 
+                "isF": data.sexOnBirthRecords.toLowerCase().indexOf('female') !== -1,
                 "isM": data.sexOnBirthRecords.toLowerCase().indexOf('female') === -1,
                 "race": data.race,
                 "signature": data.legallyBindingSignature
