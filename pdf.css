@@ -136,3 +136,8 @@ h2 p {
 }
 
 .submit m {}
+
+md-outlined-select {
+    margin-right: 10px;
+    margin-left: 10px;
+}
