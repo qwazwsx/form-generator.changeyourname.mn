@@ -169,9 +169,9 @@
                 }
 
 
-                let debug = true
-                if (window.location.hostname === 'changeyourname.mn') {
-                    debug = false;
+                let debug = false
+                if (window.location.hostname === 'localhost' || window.location.hostname === '') {
+                    debug = true;
                 }
 
                 document.getElementById('submitNAM102').addEventListener('click', function () {
