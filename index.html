@@ -214,9 +214,7 @@
 
                 if (isMobile()) {
                     dateOfBirth.value = '2000-01-01';
-                    setTimeout(() => {
-                        dateOfBirth.value = '';
-                    }, 3000);
+                    document.getElementsByClassName('return')[0].classList.add('mobile');
                 }
 
 
