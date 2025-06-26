@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeD120rAAAAAL2NLiue5fSF73SqDAnMt7ssCDjQ"></script>
 
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <title>Minnesota Name Change Form Generator - Legal Name Change Forms</title>
@@ -80,6 +81,7 @@
         <input type="tel" name="phone">
         <input type="email" name="email">
         <input type="text" name="legallyBindingSignature">
+        <input type="text" id="g-recaptcha-response" name="g-recaptcha-response">
     </form>
 
     <div class="tabContent">
@@ -109,7 +111,8 @@
                 <md-outlined-text-field id="newLastName" label="New Last Name"></md-outlined-text-field>
             </div>
 
-            <h2>3.) Sex <p onclick="sexHelp()">(?)</p></h2>
+            <h2>3.) Sex <p onclick="sexHelp()">(?)</p>
+            </h2>
             <div class="sex section">
                 <md-outlined-select id="sexOnBirthRecords"
                     supporting-text="Your sex (at birth) as it appears on your birth certificate">
@@ -190,7 +193,7 @@
 
                     <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank"
                         rel="noopener">View source on GitHub</a>.
-                        
+
                     <br>
 
                     <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener">Name Change Form
@@ -218,10 +221,11 @@
                 }
 
 
-                document.getElementById('submitNAM102').addEventListener('click', function () {
-                    document.getElementById('nameChangeForm').action = '/NAM102_Application_for_Name_Change.pdf';
-                    copyData();
-                    document.getElementById('nameChangeForm').submit();
+                document.getElementById('submitNAM102').addEventListener('click', function (e) {
+                    submitWithCaptcha(e, '/NAM102_Application_for_Name_Change.pdf');
+
+
+
                 });
 
                 document.getElementById('submitNAM103').addEventListener('click', function () {
@@ -235,6 +239,21 @@
                     copyData();
                     document.getElementById('nameChangeForm').submit();
                 });
+
+
+                function submitWithCaptcha(e, url) {
+                    e.preventDefault();
+
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute('6LeD120rAAAAAL2NLiue5fSF73SqDAnMt7ssCDjQ', { action: 'submit' }).then(function (token) {
+                            document.getElementById('nameChangeForm').action = url
+                            copyData();
+                            document.getElementById('g-recaptcha-response').value = token
+                            document.getElementById('nameChangeForm').submit();
+                        });
+                    });
+
+                }
 
                 function copyData() {
                     const fields = [

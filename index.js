@@ -2,6 +2,7 @@ var express = require("express")
 const app = express();
 const bodyParser = require('body-parser')
 const pdfFillForm = require('pdf-fill-form');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 app.use(bodyParser.urlencoded())
 
@@ -239,6 +240,30 @@ function validateManifest() {
 manifest.forEach((item) => {
     app.post(`/${item.name}`, (req, res) => {
         let fields = item.build(req.body)
+
+        // fetch recaptcha 3
+        if (!req.body['g-recaptcha-response']) {
+            return res.status(400).send('Recaptcha response is required.');
+        }
+        const recaptchaSecret = process.env.RECAPTCHA_SECRET || '';
+        fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${req.body['g-recaptcha-response']}`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                return res.status(400).send('Recaptcha verification failed.');
+            }
+            if (data.score < 0.5) {
+                return res.status(400).send('Recaptcha score too low. Please try again.');
+            }
+        })
+        .catch(err => {
+            console.error('Recaptcha verification error:', err);
+            return res.status(500).send('Internal server error during recaptcha verification.');
+        })
+
+        // if all is well, generate the PDF
 
         var pdf = pdfFillForm.writeSync(item.name, fields, { "save": "pdf" });
 
