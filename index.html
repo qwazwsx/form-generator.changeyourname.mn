@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeD120rAAAAAL2NLiue5fSF73SqDAnMt7ssCDjQ"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcMX20rAAAAAHmzTxwFdrkozT5zh5ujesz3Jb4V"></script>
 
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <title>Minnesota Name Change Form Generator - Legal Name Change Forms</title>
@@ -245,7 +245,7 @@
                     e.preventDefault();
 
                     grecaptcha.ready(function () {
-                        grecaptcha.execute('6LeD120rAAAAAL2NLiue5fSF73SqDAnMt7ssCDjQ', { action: 'submit' }).then(function (token) {
+                        grecaptcha.execute('6LcMX20rAAAAAHmzTxwFdrkozT5zh5ujesz3Jb4V', { action: 'submit' }).then(function (token) {
                             document.getElementById('nameChangeForm').action = url
                             copyData();
                             document.getElementById('g-recaptcha-response').value = token

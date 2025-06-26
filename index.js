@@ -245,7 +245,7 @@ manifest.forEach((item) => {
         if (!req.body['g-recaptcha-response']) {
             return res.status(400).send('Recaptcha response is required.');
         }
-        const recaptchaSecret = process.env.RECAPTCHA_SECRET || '';
+        const recaptchaSecret = process.env.RECAPTCHA_SECRET || new Error('RECAPTCHA_SECRET environment variable is not set.');
         fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${req.body['g-recaptcha-response']}`, {
             method: 'POST'
         })
