@@ -2,7 +2,7 @@ var express = require("express")
 const app = express();
 const bodyParser = require('body-parser')
 const pdfFillForm = require('pdf-fill-form');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 app.use(bodyParser.urlencoded())
 
@@ -215,7 +215,7 @@ function validateManifest() {
                 legallyBindingSignature: "John Doe"
             })
 
-            let json  = JSON.stringify(fields, null, 2);
+            let json = JSON.stringify(fields, null, 2);
             if (json.indexOf('undefined') !== -1) {
                 throw new Error(`[Fatal] Build function for ${item.name} returned undefined fields. Please check the build function.`);
             }
@@ -249,19 +249,22 @@ manifest.forEach((item) => {
         fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${req.body['g-recaptcha-response']}`, {
             method: 'POST'
         })
-        .then(response => response.json())
-        .then(data => {
-            if (!data.success) {
-                return res.status(400).send('Recaptcha verification failed.');
-            }
-            if (data.score < 0.5) {
-                return res.status(400).send('Recaptcha score too low. Please try again.');
-            }
-        })
-        .catch(err => {
-            console.error('Recaptcha verification error:', err);
-            return res.status(500).send('Internal server error during recaptcha verification.');
-        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.hostname !== 'localhost') {
+                    if (!data.success) {
+                        return res.status(400).send('Recaptcha verification failed.');
+                    }
+                    if (data.score < 0.5) {
+                        return res.status(400).send('Recaptcha score too low. Please try again.');
+                    }
+                }
+
+            })
+            .catch(err => {
+                console.error('Recaptcha verification error:', err);
+                return res.status(500).send('Internal server error during recaptcha verification.');
+            })
 
         // if all is well, generate the PDF
 
