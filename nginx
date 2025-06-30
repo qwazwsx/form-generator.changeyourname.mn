@@ -1,8 +1,42 @@
+# Redirect www.form-generator.changeyourname.mn → form-generator.changeyourname.mn (HTTP)
 server {
-    server_name form-generator.changeyourname.mn www.form-generator.changeyourname.mn;
+    listen 80;
+    server_name www.form-generator.changeyourname.mn;
+    return 301 https://form-generator.changeyourname.mn$request_uri;
+}
+
+# Redirect www.form-generator.changeyourname.mn → form-generator.changeyourname.mn (HTTPS)
+server {
+    listen 443 ssl;
+    server_name www.form-generator.changeyourname.mn;
+
+    ssl_certificate /etc/letsencrypt/live/form-generator.changeyourname.mn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/form-generator.changeyourname.mn/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    return 301 https://form-generator.changeyourname.mn$request_uri;
+}
+
+# Main site on form-generator.changeyourname.mn (HTTP → HTTPS redirect)
+server {
+    listen 80;
+    server_name form-generator.changeyourname.mn;
+    return 301 https://form-generator.changeyourname.mn$request_uri;
+}
+
+# Main site on form-generator.changeyourname.mn (HTTPS)
+server {
+    listen 443 ssl;
+    server_name form-generator.changeyourname.mn;
 
     root /var/www/form-generator.changeyourname.mn;
     index index.html;
+
+    ssl_certificate /etc/letsencrypt/live/form-generator.changeyourname.mn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/form-generator.changeyourname.mn/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     location / {
         proxy_pass http://localhost:4747;
@@ -12,18 +46,4 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
-
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/form-generator.changeyourname.mn/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/form-generator.changeyourname.mn/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-}
-server {
-    listen 80;
-    server_name form-generator.changeyourname.mn www.form-generator.changeyourname.mn;
-#    return 404; # managed by Certbot
-    return 301 https://$host$request_uri;
-
 }

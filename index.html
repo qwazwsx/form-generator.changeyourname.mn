@@ -8,26 +8,26 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LcMX20rAAAAAHmzTxwFdrkozT5zh5ujesz3Jb4V"></script>
 
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <title>Minnesota Name Change Form Generator - Legal Name Change Forms</title>
+    <title>Legal Name and Gender Change Form Generator</title>
     <meta name="description"
-        content="Generate NAM102, NAM103, and NAM107 forms for changing your legal name in Minnesota. Secure, open-source form generator for Minnesota name change process.">
-    <meta property="og:title" content="Minnesota Name Change Form Generator">
+        content="Generate NAM102, NAM103, and NAM107 forms for changing your legal name and gender in Minnesota. Secure, open-source form generator for Minnesota name change process.">
+    <meta property="og:title" content="Minnesota Name and Gender Change Form Generator">
     <meta property="og:description"
-        content="Generate the required forms (NAM102, NAM103, NAM107) for legally changing your name in Minnesota. Secure and easy to use.">
+        content="Generate the required forms (NAM102, NAM103, NAM107) for legally changing your name and gender in Minnesota. Secure and easy to use.">
     <meta property="og:url" content="https://changeyourname.mn/form-generator">
     <meta property="og:type" content="website">
     <meta property="og:image" content="banner.webp">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Minnesota Name Change Form Generator">
+    <meta name="twitter:title" content="Minnesota Name and Gender Change Form Generator">
     <meta name="twitter:description"
-        content="Generate required forms for legally changing your name in Minnesota. NAM102, NAM103, and NAM107 forms.">
+        content="Generate required forms for legally changing your name and gender in Minnesota. NAM102, NAM103, and NAM107 forms.">
     <meta name="twitter:image" content="images/banner.webp">
 
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "WebApplication",
-          "name": "Minnesota Name Change Form Generator",
+          "name": "Name and Gender Change Form Generator",
           "description": "Generate NAM102, NAM103, and NAM107 forms for changing your legal name in Minnesota.",
           "url": "https://changeyourname.mn/form-generator",
           "applicationCategory": "LegalService",
@@ -88,7 +88,7 @@
 
         <a class="return" href="https://changeyourname.mn">← Return to Main Guide</a>
 
-        <h1>Minnesota Name Change Form Generator</h1>
+        <h1>Name and Gender Change Form Generator</h1>
         <!-- <p>For simplicity, this automatic court form generator assumes that you have never been married or divorced, that you speak English, have no children, have no criminal history, and no land. If this is not the case, you will need to fill these forms out manually.</p> -->
 
         <div id="materialForm">
@@ -211,43 +211,39 @@
 
             <script>
                 // for some reason we need to prefill the date picker to get it to render properly on ios
-                function isMobile() {
-                    return /Mobi|Android/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches;
-                }
-
                 if (isMobile()) {
                     dateOfBirth.value = '2000-01-01';
                     document.getElementsByClassName('return')[0].classList.add('mobile');
                 }
 
+                function isMobile() {
+                    return /Mobi|Android/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches;
+                }
 
+                // handle download buttons
                 document.getElementById('submitNAM102').addEventListener('click', function (e) {
                     submitWithCaptcha(e, '/NAM102_Application_for_Name_Change.pdf');
-
-
-
                 });
 
-                document.getElementById('submitNAM103').addEventListener('click', function () {
-                    document.getElementById('nameChangeForm').action = '/NAM103_Criminal_History_Check_Release.pdf';
-                    copyData();
-                    document.getElementById('nameChangeForm').submit();
+                document.getElementById('submitNAM103').addEventListener('click', function (e) {
+                    submitWithCaptcha(e, '/NAM103_Criminal_History_Check_Release.pdf')
                 });
 
-                document.getElementById('submitNAM107').addEventListener('click', function () {
-                    document.getElementById('nameChangeForm').action = '/NAM107_Proposed_Order_Granting_Name_Change.pdf';
-                    copyData();
-                    document.getElementById('nameChangeForm').submit();
+                document.getElementById('submitNAM107').addEventListener('click', function (e) {
+                    submitWithCaptcha(e, '/NAM107_Proposed_Order_Granting_Name_Change.pdf');
                 });
 
 
+                // reCAPTCHA v3
                 function submitWithCaptcha(e, url) {
                     e.preventDefault();
 
+                    // get a token from reCAPTCHA
                     grecaptcha.ready(function () {
                         grecaptcha.execute('6LcMX20rAAAAAHmzTxwFdrkozT5zh5ujesz3Jb4V', { action: 'submit' }).then(function (token) {
                             document.getElementById('nameChangeForm').action = url
                             copyData();
+                            // add the token to the form
                             document.getElementById('g-recaptcha-response').value = token
                             document.getElementById('nameChangeForm').submit();
                         });
@@ -255,6 +251,7 @@
 
                 }
 
+                // copy data from material form to hidden form
                 function copyData() {
                     const fields = [
                         'currentFirstName',
@@ -291,6 +288,13 @@
                     alert('This is the sex marker on your birth certificate. It is not the self designated sex descriptor on your ID. It is not the gender marker with the Social Security Administration. As far as I know, it is limited to binary male and female.')
                 }
 
+
+                document.querySelector('#newSex').addEventListener('change', (e) => {
+                    if (e.target.value === document.querySelector('#sexOnBirthRecords').value) {
+                        alert('This form generator is for trans people looking to change their name AND gender marker on their birth certificate. If you are not looking to change your gender marker or update your birth certificate, you will need to edit these forms afterwords. If you are interested in a cis person version of this form, I am available for commission.');
+                    }
+
+                })
             </script>
 
         </div>

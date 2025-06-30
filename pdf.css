@@ -155,3 +155,7 @@ a.return {
 a.return.mobile{
     top: 0px;
 }
+
+a, a:visited {
+    color: firebrick;
+}
