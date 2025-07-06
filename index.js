@@ -258,6 +258,15 @@ manifest.forEach((item) => {
                     if (data.score < 0.5) {
                         return res.status(400).send('Recaptcha score too low. Please try again.');
                     }
+
+                    // if all is well, generate the PDF
+
+                    var pdf = pdfFillForm.writeSync(item.name, fields, { "save": "pdf" });
+
+                    res.setHeader('Content-Disposition', 'inline; filename="' + item.name + '"');
+                    res.setHeader('Content-Type', 'application/pdf');
+                    res.send(pdf)
+
                 }
 
             })
@@ -265,15 +274,6 @@ manifest.forEach((item) => {
                 console.error('Recaptcha verification error:', err);
                 return res.status(500).send('Internal server error during recaptcha verification.');
             })
-
-        // if all is well, generate the PDF
-
-        var pdf = pdfFillForm.writeSync(item.name, fields, { "save": "pdf" });
-
-        res.setHeader('Content-Disposition', 'inline; filename="' + item.name + '"');
-        res.setHeader('Content-Type', 'application/pdf');
-        res.send(pdf)
-
     })
 })
 

@@ -101,7 +101,7 @@ const manifest = [
         },
         // a function that maps the input from website to fields
         build: (data) => {
-            name: data.firstName + ' ' data.lastName,
+            fullName: data.firstName + ' ' data.lastName,
             address: data.address,
             hasChildren: data.children > 0
         }
