@@ -253,6 +253,7 @@ manifest.forEach((item) => {
             .then(data => {
                 if (data.hostname !== 'localhost') {
                     if (!data.success) {
+                        console.log('Recaptcha verification failed:', data);
                         return res.status(400).send('Recaptcha verification failed.');
                     }
                     if (data.score < 0.5) {
