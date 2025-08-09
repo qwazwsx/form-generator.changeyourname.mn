@@ -42,7 +42,7 @@ const manifest = [
                 "newName": `${data.newFirstName} ${data.newMiddleName} ${data.newLastName}`,
                 "fullAddress": `${data.address}, ${data.city}, ${data.state} ${data.zip}`,
                 "county": data.county,
-                "nameAndDob": `${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName} (${data.dateOfBirth})`,
+                "nameAndDob": `${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName} (${formatDate(data.dateOfBirth)})`,
                 "noSpouse": true,
                 "noChildren": true,
                 "doNameChange": true,
@@ -72,7 +72,7 @@ const manifest = [
             return {
                 "name": `${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName}`,
                 "nickname": `${data.newFirstName} ${data.newMiddleName} ${data.newLastName}`,
-                "dob": data.dateOfBirth,
+                "dob": formatDate(data.dateOfBirth),
                 "isF": data.sexOnBirthRecords.toLowerCase().indexOf('female') !== -1,
                 "isM": data.sexOnBirthRecords.toLowerCase().indexOf('female') === -1,
                 "race": data.race,
@@ -131,7 +131,7 @@ const manifest = [
                 "first": data.currentFirstName,
                 "middle": data.currentMiddleName,
                 "last": data.currentLastName,
-                "dob": data.dateOfBirth,
+                "dob": formatDate(data.dateOfBirth),
                 "doSkipSpouse": true,
                 "doSkipChildren": true,
                 "doSkipChildren1": true,
@@ -236,6 +236,11 @@ function validateManifest() {
     })
 }
 
+if (process.env.RECAPTCHA_SECRET === undefined) {
+    console.warn("[Fatal] RECAPTCHA_SECRET environment variable is not set.");
+    process.exit(1)
+}
+
 // for each item in the manifest, make a new POST endpoint
 manifest.forEach((item) => {
     app.post(`/${item.name}`, (req, res) => {
@@ -245,7 +250,7 @@ manifest.forEach((item) => {
         if (!req.body['g-recaptcha-response']) {
             return res.status(400).send('Recaptcha response is required.');
         }
-        const recaptchaSecret = process.env.RECAPTCHA_SECRET || new Error('RECAPTCHA_SECRET environment variable is not set.');
+        const recaptchaSecret = process.env.RECAPTCHA_SECRET
         fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${req.body['g-recaptcha-response']}`, {
             method: 'POST'
         })
@@ -259,16 +264,16 @@ manifest.forEach((item) => {
                     if (data.score < 0.5) {
                         return res.status(400).send('Recaptcha score too low. Please try again.');
                     }
-
-                    // if all is well, generate the PDF
-
-                    var pdf = pdfFillForm.writeSync(item.name, fields, { "save": "pdf" });
-
-                    res.setHeader('Content-Disposition', 'inline; filename="' + item.name + '"');
-                    res.setHeader('Content-Type', 'application/pdf');
-                    res.send(pdf)
-
                 }
+                // if all is well, generate the PDF
+
+                var pdf = pdfFillForm.writeSync(item.name, fields, { "save": "pdf" });
+
+                res.setHeader('Content-Disposition', 'inline; filename="' + item.name + '"');
+                res.setHeader('Content-Type', 'application/pdf');
+                res.send(pdf)
+
+
 
             })
             .catch(err => {
@@ -291,6 +296,13 @@ function validateInput(fields, input) {
 
 // formats a date to MM-DD-YYYY
 function formatDate(date) {
+    // turn "YYYY-MM-DD" into "MM-DD-YYYY"
+    if (typeof date === 'string') {
+        var parts = date.split('-');
+        return [parts[1], parts[2], parts[0]].join('-');
+    }
+
+    // otherwise assume it's a Date object
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
