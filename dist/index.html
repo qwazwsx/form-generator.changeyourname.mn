@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcgsXkrAAAAAOZ8g7jVWWZssZ6PUcfdltyyiiwy"></script>
+
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <title>Legal Name and Gender Change Form Generator</title>
+    <meta name="description"
+        content="Generate NAM102, NAM103, and NAM107 forms for changing your legal name and gender in Minnesota. Secure, open-source form generator for Minnesota name change process.">
+    <meta property="og:title" content="Minnesota Name and Gender Change Form Generator">
+    <meta property="og:description"
+        content="Generate the required forms (NAM102, NAM103, NAM107) for legally changing your name and gender in Minnesota. Secure and easy to use.">
+    <meta property="og:url" content="https://changeyourname.mn/form-generator">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="banner.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Minnesota Name and Gender Change Form Generator">
+    <meta name="twitter:description"
+        content="Generate required forms for legally changing your name and gender in Minnesota. NAM102, NAM103, and NAM107 forms.">
+    <meta name="twitter:image" content="images/banner.webp">
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Name and Gender Change Form Generator",
+          "description": "Generate NAM102, NAM103, and NAM107 forms for changing your legal name in Minnesota.",
+          "url": "https://changeyourname.mn/form-generator",
+          "applicationCategory": "LegalService",
+          "operatingSystem": "All",
+          "author": {
+            "@type": "Person",
+            "name": "Emma Zimbinski",
+            "url": "https://zimbin.ski"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "changeyourname.mn"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=arrow_back,badge,contact_mail,description,download,fact_check,gavel,help,person,security,signature,wc"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+  <script type="module" crossorigin src="/assets/index-CYxdVKAt.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BcVi29QI.css">
+</head>
+
+<body class="loading">
+    <div class="loader"></div>
+
+    <form style="display:none;" id="nameChangeForm" action="/NAM102_Application_for_Name_Change.pdf" method="POST"
+        target="_blank">
+        <input type="text" name="currentFirstName">
+        <input type="text" name="currentMiddleName">
+        <input type="text" name="currentLastName">
+        <input type="text" name="newFirstName">
+        <input type="text" name="newMiddleName">
+        <input type="text" name="newLastName">
+        <input type="date" name="dateOfBirth">
+        <input type="text" name="race">
+        <input type="text" name="sexOnBirthRecords">
+        <input type="text" name="newSex">
+        <input type="text" name="address">
+        <input type="text" name="city">
+        <input type="text" name="state">
+        <input type="text" name="zip">
+        <input type="text" name="county">
+        <input type="tel" name="phone">
+        <input type="email" name="email">
+        <input type="text" name="legallyBindingSignature">
+        <input type="text" id="g-recaptcha-response" name="g-recaptcha-response">
+    </form>
+
+    <div class="bg-img"></div>
+
+    <!-- Top App Bar -->
+    <div class="app-bar">
+        <div class="app-bar-content">
+            <div class="app-bar-section">
+                <a href="https://changeyourname.mn" class="back-button" aria-label="Return to main guide">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+                <h1 class="headline">Form Generator</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header Card -->
+        <div class="card header-card">
+            <img src="banner.webp" height="200" alt="Name Change Form Generator">
+            <h1>Name and Gender Change Form Generator</h1>
+            <p class="body-text">Generate the required legal forms for your name and gender marker change in Minnesota,
+                includes NAM102, NAM103, and NAM107.
+                <br><br>
+                This form makes a number of assumptions in order to "just work" for
+                the most amount of people. You are responsible for verifying all information before
+                submitting to the courts. Please see the full list of assumptions this form generator will make on the
+                <a href="https://changeyourname.mn#introduction">main page</a>.
+            </p>
+            <div class="sub-card sub-card--info">
+                <p><strong>Security Notice:</strong> Your information is encrypted and is not saved or logged on the
+                    server. This app is <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn"
+                        target="_blank" rel="noopener">open source</a>. Security audits are welcome.</p>
+            </div>
+        </div>
+
+        <div id="materialForm">
+            <!-- Section 1: Current Identity -->
+            <div class="card guide-section" id="current-identity">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">person</span>
+                    <h2>1. Current Identity</h2>
+                </div>
+                <div class="section-content">
+                    <div class="form-grid">
+                        <md-outlined-text-field id="currentFirstName" label="Current Legal First Name"
+                            supporting-text="As shown on official documents"></md-outlined-text-field>
+                        <md-outlined-text-field id="currentMiddleName" label="Current Legal Middle Name"
+                            supporting-text="Leave blank if none"></md-outlined-text-field>
+                        <md-outlined-text-field id="currentLastName" label="Current Legal Last Name"
+                            supporting-text="As shown on official documents"></md-outlined-text-field>
+                        <md-outlined-text-field id="dateOfBirth" label="Date of Birth"
+                            type="date"></md-outlined-text-field>
+                        <md-outlined-text-field id="race" label="Race" type="text"
+                            supporting-text="Race for NAM103"></md-outlined-text-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: New Identity -->
+            <div class="card guide-section" id="new-identity">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">badge</span>
+                    <h2>2. Changed Identity</h2>
+                </div>
+                <div class="section-content">
+                    <div class="form-grid">
+                        <md-outlined-text-field id="newFirstName" label="New First Name"
+                            supporting-text="Your chosen first name"></md-outlined-text-field>
+                        <md-outlined-text-field id="newMiddleName" label="New Middle Name"
+                            supporting-text="Leave blank if none"></md-outlined-text-field>
+                        <md-outlined-text-field id="newLastName" label="New Last Name"
+                            supporting-text="Your chosen last name"></md-outlined-text-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Sex/Gender -->
+            <div class="card guide-section" id="sex-gender">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">wc</span>
+                    <h2>3. Sex/Gender Information</h2>
+                    <md-icon-button onclick="sexHelp()" aria-label="Help with sex/gender information">
+                        <span class="material-symbols-outlined">help</span>
+                    </md-icon-button>
+                </div>
+                <div class="section-content">
+                    <div class="form-grid">
+                        <md-outlined-select id="sexOnBirthRecords"
+                            supporting-text="Your sex as it appears on your birth certificate now">
+                            <md-select-option value="Female">
+                                <div slot="headline">Female</div>
+                            </md-select-option>
+                            <md-select-option value="Male">
+                                <div slot="headline">Male</div>
+                            </md-select-option>
+                        </md-outlined-select>
+
+                        <md-outlined-select id="newSex"
+                            supporting-text="Your sex as you want it on your birth certificate">
+                            <md-select-option value="Female">
+                                <div slot="headline">Female</div>
+                            </md-select-option>
+                            <md-select-option value="Male">
+                                <div slot="headline">Male</div>
+                            </md-select-option>
+                        </md-outlined-select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Contact Information -->
+            <div class="card guide-section" id="contact-info">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">contact_mail</span>
+                    <h2>4. Contact Information</h2>
+                </div>
+                <div class="section-content">
+                    <div class="sub-card">
+                        <h3>Address</h3>
+                        <div class="form-grid">
+                            <md-outlined-text-field id="address" label="Street Address"
+                                supporting-text="Include apartment/unit number"></md-outlined-text-field>
+                            <md-outlined-text-field id="city" label="City"></md-outlined-text-field>
+                            <md-outlined-text-field id="state" label="State" value="Minnesota"></md-outlined-text-field>
+                            <md-outlined-text-field id="zip" label="ZIP Code"></md-outlined-text-field>
+                            <md-outlined-text-field id="county" label="County"
+                                supporting-text="e.g., Hennepin, Ramsey, Dakota"></md-outlined-text-field>
+                        </div>
+                    </div>
+
+                    <div class="sub-card">
+                        <h3>Contact Details</h3>
+                        <div class="form-grid">
+                            <md-outlined-text-field id="phone" label="Phone Number" type="tel"
+                                supporting-text="Include area code"></md-outlined-text-field>
+                            <md-outlined-text-field id="email" label="Email Address" type="email"
+                                supporting-text="Court will use this for updates"></md-outlined-text-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Signature -->
+            <div class="card guide-section" id="signature">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">signature</span>
+                    <h2>5. Legal Signature</h2>
+                </div>
+                <div class="section-content">
+                    <div class="sub-card sub-card--secondary-accent">
+                        <p><strong>Important:</strong> By signing here, you agree this signature will apply to the
+                            following documents:
+                            <a href="https://changeyourname.mn/pdfs/NAM102_Application_for_Name_Change.pdf"
+                                target="_blank" rel="noopener">NAM102</a>,
+                            <a href="https://changeyourname.mn/pdfs/NAM103_Criminal_History_Check_Release.pdf"
+                                target="_blank" rel="noopener">NAM103</a>, and
+                            <a href="https://changeyourname.mn/pdfs/NAM107_Proposed_Order_Granting_Name_Change.pdf"
+                                target="_blank" rel="noopener">NAM107</a>.
+                        </p>
+                    </div>
+                    <div class="form-grid">
+                        <md-outlined-text-field id="legallyBindingSignature" label="Legally Binding Signature"
+                            supporting-text="This may be your new legal name"></md-outlined-text-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Download Forms -->
+            <div class="card guide-section" id="download-forms">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">download</span>
+                    <h2>6. Download Your Forms</h2>
+                </div>
+                <div class="section-content">
+                    <div class="sub-card sub-card--highlight">
+                        <p><strong>Ready to download:</strong> Click each button below to generate your completed forms.
+                            Make sure all information above is correct before downloading.</p>
+                    </div>
+
+                    <div class="button-group">
+                        <md-filled-button class="submit" id="submitNAM102">
+                            <span class="material-symbols-outlined" slot="icon">description</span>
+                            Download NAM102 - Application for Name Change
+                        </md-filled-button>
+                        <md-filled-button class="submit" id="submitNAM103">
+                            <span class="material-symbols-outlined" slot="icon">security</span>
+                            Download NAM103 - Criminal History Check Release
+                        </md-filled-button>
+                        <md-filled-button class="submit" id="submitNAM107">
+                            <span class="material-symbols-outlined" slot="icon">gavel</span>
+                            Download NAM107 - Proposed Order Granting Name Change
+                        </md-filled-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Verification -->
+            <div class="card guide-section" id="verification">
+                <div class="section-header">
+                    <span class="material-symbols-outlined section-icon">fact_check</span>
+                    <h2>7. Verify Your Information</h2>
+                </div>
+                <div class="section-content">
+                    <div class="sub-card sub-card--warning">
+                        <p><strong>Important Disclaimer:</strong> You are responsible for checking the validity of the
+                            information in these forms. I am not a lawyer, and the software I wrote definitely isn't one
+                            either.</p>
+                    </div>
+
+                    <p>If you are married, divorced, have children, a criminal history, own land, or are cisgender,
+                        you'll need to manually update information on these forms after downloading.</p>
+
+                    <p>The PDF's are still editable (on iOS you need the Adobe Acrobat Reader app) until you click
+                        print and export as a PDF again. Submitting the editable versions may cause issues with
+                        submitting online.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer card">
+        <!-- <hr> -->
+        <p>
+            <i><u>Dedicated to <b>Sara Millerey González</b>, whose life and death calls us to justice.</u></i>
+            🧱
+            <br>
+            I'm not a lawyer, and this isn't legal advice. This guide is based on my own experience and research
+            &mdash;
+            double-check everything with official sources or get legal help from the <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
+                target="_blank" rel="noopener">MN Volunteer Lawyer Network</a> if you need it.
+
+            <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank" rel="noopener">View
+                source on GitHub</a>.
+
+            <br>
+
+            <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener">Name Change Form
+                Generator</a>
+            &copy; 2025 by
+            <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
+            is licensed under
+            <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+.</a>
+        </p>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.fonts.ready.then(() => {
+                document.body.classList.remove('loading');
+            });
+
+        })
+        // Pre-fill the date picker to get it to render properly on mobile
+        if (isMobile()) {
+            document.getElementById('dateOfBirth').value = '2000-01-01';
+        }
+
+        function isMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches;
+        }
+
+        // Handle download buttons
+        document.getElementById('submitNAM102').addEventListener('click', function (e) {
+            submitWithCaptcha(e, '/NAM102_Application_for_Name_Change.pdf');
+        });
+
+        document.getElementById('submitNAM103').addEventListener('click', function (e) {
+            submitWithCaptcha(e, '/NAM103_Criminal_History_Check_Release.pdf');
+        });
+
+        document.getElementById('submitNAM107').addEventListener('click', function (e) {
+            submitWithCaptcha(e, '/NAM107_Proposed_Order_Granting_Name_Change.pdf');
+        });
+
+        // reCAPTCHA v3
+        function submitWithCaptcha(e, url) {
+            e.preventDefault();
+
+            // Get a token from reCAPTCHA
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LcgsXkrAAAAAOZ8g7jVWWZssZ6PUcfdltyyiiwy', { action: 'submit' }).then(function (token) {
+                    document.getElementById('nameChangeForm').action = url;
+                    copyData();
+                    // Add the token to the form
+                    document.getElementById('g-recaptcha-response').value = token;
+                    document.getElementById('nameChangeForm').submit();
+                });
+            });
+        }
+
+        // Copy data from material form to hidden form
+        function copyData() {
+            const fields = [
+                'currentFirstName',
+                'currentMiddleName',
+                'currentLastName',
+                'newFirstName',
+                'newMiddleName',
+                'newLastName',
+                'dateOfBirth',
+                'race',
+                'sexOnBirthRecords',
+                'newSex',
+                'address',
+                'city',
+                'state',
+                'zip',
+                'county',
+                'phone',
+                'email',
+                'legallyBindingSignature'
+            ];
+
+            fields.forEach(field => {
+                const value = document.getElementById(field).value;
+                const input = document.querySelector(`input[name="${field}"]`);
+                if (input) {
+                    input.value = value;
+                }
+            });
+        }
+
+        function sexHelp() {
+            alert('This is the sex marker on your birth certificate. It is not the SELF-DESIGNATED sex descriptor on your ID. This information will be used to update your information with the Social Security Administration (hopefully, post trump). If you are looking for a non-binary option, you should contact the MN Volunteer Lawyers Network as there is some risk weighing to be done.');
+        }
+
+        // Alert if user selects same sex for both fields
+        document.querySelector('#newSex').addEventListener('change', (e) => {
+            if (e.target.value === document.querySelector('#sexOnBirthRecords').value) {
+                alert('This form generator is for trans people looking to change their name AND gender marker on their birth certificate. If you are NOT looking to change your gender marker or update your birth certificate, you will need to edit these forms afterwards.');
+            }
+        });
+    </script>
+
+    </div>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQTGQ207FY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZQTGQ207FY');
+    </script>
+</body>
+
+</html>

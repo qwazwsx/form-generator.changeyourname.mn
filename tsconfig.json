@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true
+    },
+    "watchOptions": {
+        "watchFile": "fixedPollingInterval",
+        "watchDirectory": "fixedPollingInterval",
+        "fallbackPolling": "fixedInterval",
+        "synchronousWatchDirectory": true
+    }
+}

@@ -50,9 +50,9 @@
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        rel="stylesheet">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=arrow_back,badge,contact_mail,description,download,fact_check,gavel,help,person,security,signature,wc"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
     <script type="importmap">
       {
         "imports": {
@@ -63,7 +63,9 @@
     <link rel="stylesheet" href="pdf.css">
 </head>
 
-<body>
+<body class="loading">
+    <div class="loader"></div>
+
     <form style="display:none;" id="nameChangeForm" action="/NAM102_Application_for_Name_Change.pdf" method="POST"
         target="_blank">
         <input type="text" name="currentFirstName">
@@ -87,6 +89,8 @@
         <input type="text" id="g-recaptcha-response" name="g-recaptcha-response">
     </form>
 
+    <div class="bg-img"></div>
+
     <!-- Top App Bar -->
     <div class="app-bar">
         <div class="app-bar-content">
@@ -105,7 +109,13 @@
             <img src="banner.webp" height="200" alt="Name Change Form Generator">
             <h1>Name and Gender Change Form Generator</h1>
             <p class="body-text">Generate the required legal forms for your name and gender marker change in Minnesota,
-                includes NAM102, NAM103, and NAM107.</p>
+                includes NAM102, NAM103, and NAM107.
+                <br><br>
+                This form makes a number of assumptions in order to "just work" for
+                the most amount of people. You are responsible for verifying all information before
+                submitting to the courts. Please see the full list of assumptions this form generator will make on the
+                <a href="https://changeyourname.mn#introduction">main page</a>.
+            </p>
             <div class="sub-card sub-card--info">
                 <p><strong>Security Notice:</strong> Your information is encrypted and is not saved or logged on the
                     server. This app is <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn"
@@ -195,7 +205,7 @@
                     <h2>4. Contact Information</h2>
                 </div>
                 <div class="section-content">
-                    <div class="sub-card sub-card--primary-accent">
+                    <div class="sub-card">
                         <h3>Address</h3>
                         <div class="form-grid">
                             <md-outlined-text-field id="address" label="Street Address"
@@ -229,7 +239,14 @@
                 <div class="section-content">
                     <div class="sub-card sub-card--secondary-accent">
                         <p><strong>Important:</strong> By signing here, you agree this signature will apply to the
-                            following documents: NAM102, NAM103, and NAM107.</p>
+                            following documents:
+                            <a href="https://changeyourname.mn/pdfs/NAM102_Application_for_Name_Change.pdf"
+                                target="_blank" rel="noopener">NAM102</a>,
+                            <a href="https://changeyourname.mn/pdfs/NAM103_Criminal_History_Check_Release.pdf"
+                                target="_blank" rel="noopener">NAM103</a>, and
+                            <a href="https://changeyourname.mn/pdfs/NAM107_Proposed_Order_Granting_Name_Change.pdf"
+                                target="_blank" rel="noopener">NAM107</a>.
+                        </p>
                     </div>
                     <div class="form-grid">
                         <md-outlined-text-field id="legallyBindingSignature" label="Legally Binding Signature"
@@ -278,17 +295,21 @@
                         <p><strong>Important Disclaimer:</strong> You are responsible for checking the validity of the
                             information in these forms. I am not a lawyer, and the software I wrote definitely isn't one
                             either.</p>
-
-                        <p>If you are married, divorced, have children, a criminal history, own land, or are cis, you'll
-                            need to manually update information on these forms after downloading.</p>
                     </div>
+
+                    <p>If you are married, divorced, have children, a criminal history, own land, or are cisgender,
+                        you'll need to manually update information on these forms after downloading.</p>
+
+                    <p>The PDF's are still editable (on iOS you need the Adobe Acrobat Reader app) until you click
+                        print and export as a PDF again. Submitting the editable versions may cause issues with
+                        the online court system. Make sure to export the final versions before submitting.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="footer">
-        <hr>
+    <div class="footer card">
+        <!-- <hr> -->
         <p>
             <i><u>Dedicated to <b>Sara Millerey González</b>, whose life and death calls us to justice.</u></i>
             🧱
@@ -314,6 +335,13 @@
     </div>
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.fonts.ready.then(() => {
+                document.body.classList.remove('loading');
+            });
+
+        })
         // Pre-fill the date picker to get it to render properly on mobile
         if (isMobile()) {
             document.getElementById('dateOfBirth').value = '2000-01-01';
@@ -385,20 +413,32 @@
         }
 
         function sexHelp() {
-            alert('This is the sex marker on your birth certificate. It is not the self designated sex descriptor on your ID. It is not the gender marker with the Social Security Administration. As far as I know, it is limited to binary male and female.');
+            alert('This is the sex marker on your birth certificate. It is not the SELF-DESIGNATED sex descriptor on your ID. This information will be used to update your information with the Social Security Administration (hopefully, post trump). If you are looking for a non-binary option, you should contact the MN Volunteer Lawyers Network as there is some risk weighing to be done.');
         }
 
         // Alert if user selects same sex for both fields
         document.querySelector('#newSex').addEventListener('change', (e) => {
             if (e.target.value === document.querySelector('#sexOnBirthRecords').value) {
-                alert('This form generator is for trans people looking to change their name AND gender marker on their birth certificate. If you are not looking to change your gender marker or update your birth certificate, you will need to edit these forms afterwards. If you are interested in a cis person version of this form, I am available for commission.');
+                alert('This form generator is for trans people looking to change their name AND gender marker on their birth certificate. If you are NOT looking to change your gender marker or update your birth certificate, you will need to edit these forms afterwards.');
             }
         });
     </script>
 
     </div>
     <script type="module">
-        import '@material/web/all.js';
+        // import '@material/web/all.js';
+        import '@material/web/button/filled-button.js';
+        import '@material/web/textfield/outlined-text-field.js';
+        import '@material/web/select/outlined-select.js';
+        import '@material/web/select/select-option.js';
+        import '@material/web/iconbutton/icon-button.js';
+        // import '@material/web/ripple/ripple.js';
+        // import '@material/web/icon/icon.js';
+        // import {MDCRipple} from '@material/ripple';
+        // const buttons = document.querySelectorAll('.mdc-button, .mdc-icon-button');
+        // buttons.forEach((button) => {
+        //     new MDCRipple(button);
+        // }); 
     </script>
 
     <!-- Google tag (gtag.js) -->

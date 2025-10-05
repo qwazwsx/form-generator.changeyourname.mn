@@ -63,9 +63,17 @@ body {
 }
 
 @keyframes rainbowFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Layout containers */
@@ -81,6 +89,8 @@ body {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
     margin: 16px 0;
     padding: 24px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
 
 /* App bar styles */
@@ -325,27 +335,27 @@ a:hover {
     .container {
         padding: 8px;
     }
-    
+
     .card {
         padding: 16px;
     }
-    
+
     .form-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .app-bar {
         padding: 12px 16px;
     }
-    
+
     .headline {
         font-size: 1.2rem;
     }
-    
+
     .header-card h1 {
         font-size: 1.5rem;
     }
-    
+
     .section-header h2 {
         font-size: 1.3rem;
     }
@@ -357,7 +367,7 @@ a:hover {
         align-items: flex-start;
         gap: 8px;
     }
-    
+
     .button-group {
         gap: 12px;
     }
@@ -378,4 +388,37 @@ md-outlined-field.field {
 
 md-outlined-text-field {
     height: fit-content;
+}
+
+.bg-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/bg.webp);
+    opacity: .05;
+
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity .2s ease-out, visibility .2s ease-out;
+    background: linear-gradient(90deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a);
+    background-size: 600% 600%;
+    pointer-events: none;
+}
+
+body:not(.loading) .loader {
+    opacity: 0;
 }
