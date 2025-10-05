@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "esModuleInterop": true
+        // "module": "commonjs",
+        "module": "ESNext",
+        "target": "ES2020",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
     },
     "watchOptions": {
         "watchFile": "fixedPollingInterval",
