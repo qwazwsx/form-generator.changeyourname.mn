@@ -101,7 +101,7 @@ const manifest = [
         },
         // a function that maps the input from website to fields
         build: (data) => {
-            fullName: data.firstName + ' ' data.lastName,
+            fullName: data.firstName + ' ' + data.lastName,
             address: data.address,
             hasChildren: data.children > 0
         }
@@ -119,7 +119,7 @@ On startup, the server will validate all PDFs in the manifest. This includes che
 
 How do I add or edit a form?
 
-https://streamable.com/3zor3u
+https://youtu.be/FvXLREVgaH0
 
 **Add Forms to the PDf using LibreOffice Draw**
 
